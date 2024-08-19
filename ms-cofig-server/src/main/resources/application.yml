@@ -7,6 +7,10 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/noetipo/DAD-2024-G1.git # ruta del repositorio git
+          uri: https://github.com/noetipo/DAD-2024-2.git # ruta del repositorio git
           searchPaths: config-data
-          default-label: main
+          default-label: config-server
+  security:
+    user:
+      name: root
+      password: 123456
