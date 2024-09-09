@@ -1,6 +1,8 @@
 package com.example.mspedido.service.impl;
 
 import com.example.mspedido.entity.Order;
+import com.example.mspedido.entity.OrderDetail;
+import com.example.mspedido.feign.ProductFeign;
 import com.example.mspedido.repository.OrderRepository;
 import com.example.mspedido.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private ProductFeign productFeign;
+
     @Override
     public List<Order> list() {
         return orderRepository.findAll();
@@ -27,6 +32,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Optional<Order> findById(Integer id) {
+        Optional<Order> order = orderRepository.findById(id);
+        for (OrderDetail orderDetail : order.get().getOrderDetails()) {
+            orderDetail.setProductDto(productFeign.getById(orderDetail.getProductId()).getBody());
+        }
         return orderRepository.findById(id);
     }
 

@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/product")
@@ -21,8 +20,8 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Product>> getById(@PathVariable Integer id) {
-        return ResponseEntity.ok(productService.findById(id));
+    public ResponseEntity<Product> getById(@PathVariable Integer id) {
+        return ResponseEntity.ok(productService.findById(id).get());
     }
 
     @PostMapping
