@@ -16,10 +16,10 @@ spring:
 eureka:
   client:
     serviceUrl:
-
-    defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
+      #defaultZone: http://localhost:8090/eureka
+      defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
   instance:
-
+    #hostname: localhost
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 jwt:
   secret: secret
